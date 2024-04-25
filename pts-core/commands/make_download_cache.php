@@ -119,9 +119,11 @@ class make_download_cache implements pts_option_interface
 		}
 
 		// Find files in download-cache/ that weren't part of an installed test (but could have just been tossed in there) to cache
+		echo PHP_EOL . pts_client::cli_just_bold('Indexing supplemental files in the cache... ') . PHP_EOL;
 		foreach(glob($dc_write_directory . '/*') as $cached_file)
 		{
 			$file_name = basename($cached_file);
+			echo pts_client::cli_just_bold('   Indexing: ') . $file_name . PHP_EOL;
 			if(!isset($json_download_cache['phoronix-test-suite']['download-cache'][$file_name]) && $file_name != 'pts-download-cache.json')
 			{
 				$json_download_cache['phoronix-test-suite']['download-cache'][$file_name] = array(
